@@ -1,7 +1,6 @@
 import pandas as pd
 import ast
 
-from pandas.core.interchange.dataframe_protocol import DataFrame
 from tabulate import tabulate
 
 from Spider import get_chart_data, get_summary_data
@@ -41,10 +40,11 @@ def active_electric_quantity_data2csv(time_range: list[str] | tuple[str]) -> Non
 
     df.to_csv('./Save/ActiveElectricQuantity.csv', index=False)
 
-def get_active_electric_quantity_data(time_range: list[str] | tuple[str]) -> dict:
+def get_active_electric_quantity_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取有功电量
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -80,7 +80,8 @@ def get_active_electric_quantity_data(time_range: list[str] | tuple[str]) -> dic
         'total_negative_active_electric_quantity': y_data2__total_negative_active_electric_quantity
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -135,10 +136,11 @@ def frozen_electric_quantity2csv(time_range: list[str] | tuple[str]) -> None:
     df.to_csv('./Save/FrozenElectricQuantity.csv', index=False)
 
 
-def get_frozen_electric_quantity_data(time_range: list[str] | tuple[str]) -> dict:
+def get_frozen_electric_quantity_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取冻结电量并保存为csv文件
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -192,7 +194,8 @@ def get_frozen_electric_quantity_data(time_range: list[str] | tuple[str]) -> dic
         'total_real_frozen_electric_quantity': y_data_total__total_real_frozen_electric_quantity
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -247,10 +250,11 @@ def anti_frozen_electric_quantity2csv(time_range: list[str] | tuple[str]) -> Non
     df.to_csv('./Save/AntiFrozenElectricQuantity.csv', index=False)
 
 
-def get_anti_frozen_electric_quantity_data(time_range: list[str] | tuple[str]) -> dict:
+def get_anti_frozen_electric_quantity_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取反向冻结电量并保存为csv文件
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -303,7 +307,8 @@ def get_anti_frozen_electric_quantity_data(time_range: list[str] | tuple[str]) -
         'total_anti_frozen_real_electric_quantity': y_data_total__total_real_anti_frozen_electric_quantity
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -344,10 +349,11 @@ def reactive_electric_quantity2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/ReactiveElectricQuantity.csv', index=False)
 
-def get_reactive_electric_quantity_data(time_range: list[str] | tuple[str]) -> dict:
+def get_reactive_electric_quantity_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取无功电量
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
     spider_data = get_chart_data('ReactiveElectricQuantity', time_range)
@@ -382,7 +388,8 @@ def get_reactive_electric_quantity_data(time_range: list[str] | tuple[str]) -> d
         'total_negative_reactive_electric_quantity': y_data2__total_negative_reactive_electric_quantity
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -431,10 +438,14 @@ def active_reactive_electric_quantity2csv(time_range: list[str] | tuple[str]) ->
 
     df.to_csv('./Save/ActiveReactiveElectricQuantity.csv', index=False)
 
-def get_active_reactive_electric_quantity_data(time_range: list[str] | tuple[str]) -> dict:
+def get_active_reactive_electric_quantity_data(
+        time_range: list[str] | tuple[str],
+        terminal_output: bool = True
+) -> dict:
     """
     获取有功无功电量
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -482,7 +493,8 @@ def get_active_reactive_electric_quantity_data(time_range: list[str] | tuple[str
         'total_negative_reactive_electric_quantity': y_data4__total_negative_reactive_electric_quantity
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -523,10 +535,11 @@ def active_power2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/ActivePower.csv', index=False)
 
-def get_active_power_data(time_range: list[str] | tuple[str]) -> dict:
+def get_active_power_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取有功功率
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -566,8 +579,8 @@ def get_active_power_data(time_range: list[str] | tuple[str]) -> dict:
         'c_phase_active_power': y_data3__c_phase_active_power
     }
 
-
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -608,10 +621,11 @@ def reactive_power2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/ReactivePower.csv', index=False)
 
-def get_reactive_power_data(time_range: list[str] | tuple[str]) -> dict:
+def get_reactive_power_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取无功功率
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -651,7 +665,8 @@ def get_reactive_power_data(time_range: list[str] | tuple[str]) -> dict:
         'c_phase_reactive_power': y_data3__c_phase_reactive_power
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -705,10 +720,11 @@ def active_reactive_power2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/ActiveReactivePower.csv', index=False)
 
-def get_active_reactive_power_data(time_range: list[str] | tuple[str]) -> dict:
+def get_active_reactive_power_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取有功无功功率
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -756,7 +772,8 @@ def get_active_reactive_power_data(time_range: list[str] | tuple[str]) -> dict:
         'c_phase_reactive_power': y_data3__c_phase_reactive_power
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -797,10 +814,11 @@ def apparent_power2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/ApparentPower.csv', index=False)
 
-def get_apparent_power_data(time_range: list[str] | tuple[str]) -> dict:
+def get_apparent_power_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取视在功率
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -840,7 +858,8 @@ def get_apparent_power_data(time_range: list[str] | tuple[str]) -> dict:
         'c_phase_apparent_power': y_data3__c_phase_apparent_power
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -881,10 +900,11 @@ def power_factor2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/PowerFactor.csv', index=False)
 
-def get_power_factor_data(time_range: list[str] | tuple[str]) -> dict:
+def get_power_factor_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取功率因数
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -924,7 +944,8 @@ def get_power_factor_data(time_range: list[str] | tuple[str]) -> dict:
         'c_phase_power_factor': y_data3__c_phase_power_factor
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -951,10 +972,11 @@ def maximum_demand2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/MaximumDemand.csv', index=False)
 
-def get_maximum_demand_data(time_range: list[str] | tuple[str]) -> dict:
+def get_maximum_demand_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取最大需量
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -977,7 +999,8 @@ def get_maximum_demand_data(time_range: list[str] | tuple[str]) -> dict:
 
     show_data = {'time': x_axis__time, 'maximum_demand': y_datatotal__maximum_demand}
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -1020,10 +1043,11 @@ def voltage2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/Voltage.csv', index=False)
 
-def get_voltage_data(time_range: list[str] | tuple[str]) -> dict:
+def get_voltage_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取电压
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -1065,7 +1089,8 @@ def get_voltage_data(time_range: list[str] | tuple[str]) -> dict:
         'three_phase_voltage_imbalance(%)': y_data_total__three_phase_voltage_imbalance
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -1108,10 +1133,11 @@ def current2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/Current.csv', index=False)
 
-def get_current_data(time_range: list[str] | tuple[str]) -> dict:
+def get_current_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取电流
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -1153,8 +1179,8 @@ def get_current_data(time_range: list[str] | tuple[str]) -> dict:
         'three_phase_current_imbalance(%)': y_data_total__three_phase_current_imbalance
     }
 
-
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -1202,10 +1228,11 @@ def voltage_current2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/VoltageCurrentHz.csv', index=False)
 
-def get_voltage_current_data(time_range: list[str] | tuple[str]) -> dict:
+def get_voltage_current_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取电压电流
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -1254,7 +1281,8 @@ def get_voltage_current_data(time_range: list[str] | tuple[str]) -> dict:
         'c_phase_current': y_data3__c_phase_current,
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -1300,12 +1328,13 @@ def electricity_bill2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/ElectricityBill.csv', index=False)
 
-def get_electricity_bill_data(time_range: list[str] | tuple[str]) -> dict:
+def get_electricity_bill_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
-        获取冻结电费并保存为csv文件
-        :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
-        :return: dict(time:{items: values}) / dict(None)
-        """
+    获取冻结电费并保存为csv文件
+    :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
+    :return: dict(time:{items: values}) / dict(None)
+    """
 
     spider_data = get_chart_data('ElectricityBill', time_range)
     if spider_data['status'] != 'success':
@@ -1349,7 +1378,8 @@ def get_electricity_bill_data(time_range: list[str] | tuple[str]) -> dict:
         'total_real_electricity_bill': y_data_total__total_real_electricity_bill
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -1428,10 +1458,11 @@ def summary_active_electric_quantity2csv(time_range: list[str] | tuple[str]) -> 
 
     df.to_csv('./Save/SummaryActiveElectricQuantity.csv', index=False)
 
-def get_summary_active_electric_quantity_data(time_range: list[str] | tuple[str]) -> dict:
+def get_summary_active_electric_quantity_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取有功电量汇总
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(items: values) / dict(None)
     """
 
@@ -1507,7 +1538,8 @@ def get_summary_active_electric_quantity_data(time_range: list[str] | tuple[str]
         'negative_electric_quantity_minimum': [negative_active_electric_quantity_minimum]
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -1546,10 +1578,11 @@ def summary_frozen_electric_quantity2csv(time_range: list[str] | tuple[str]) -> 
 
     df.to_csv('./Save/SummaryFrozenElectricQuantity.csv', index=False)
 
-def get_summary_frozen_electric_quantity_data(time_range: list[str] | tuple[str]) -> dict:
+def get_summary_frozen_electric_quantity_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取冻结电量汇总
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(time:{items: values}) / dict(None)
     """
 
@@ -1584,7 +1617,8 @@ def get_summary_frozen_electric_quantity_data(time_range: list[str] | tuple[str]
         'valley_frozen_electric_quantity': [usekwh4__valley_frozen_electric_quantity]
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -1622,10 +1656,14 @@ def summary_anti_frozen_electric_quantity2csv(time_range: list[str] | tuple[str]
 
     df.to_csv('./Save/SummaryAntiFrozenElectricQuantity.csv', index=False)
 
-def get_summary_anti_frozen_electric_quantity_data(time_range: list[str] | tuple[str]) -> dict:
+def get_summary_anti_frozen_electric_quantity_data(
+        time_range: list[str] | tuple[str],
+        terminal_output: bool = True
+) -> dict:
     """
     获取反冻结电量汇总
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(items: values) / dict(None)
     """
 
@@ -1660,7 +1698,8 @@ def get_summary_anti_frozen_electric_quantity_data(time_range: list[str] | tuple
         'valley_anti_frozen_electric_quantity': [usekwh4__valley_anti_frozen_electric_quantity]
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -1738,10 +1777,14 @@ def summary_reactive_electric_quantity2csv(time_range: list[str] | tuple[str]) -
 
     df.to_csv('./Save/SummaryReactiveElectricQuantity.csv', index=False)
 
-def get_summary_reactive_electric_quantity_data(time_range: list[str] | tuple[str]) -> dict:
+def get_summary_reactive_electric_quantity_data(
+        time_range: list[str] | tuple[str],
+        terminal_output: bool = True
+) -> dict:
     """
     获取无功电量汇总
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(items: values) / dict(None)
     """
 
@@ -1817,7 +1860,8 @@ def get_summary_reactive_electric_quantity_data(time_range: list[str] | tuple[st
         'negative_reactive_electric_quantity_minimum': [negative_reactive_electric_quantity_minimum]
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -1900,10 +1944,14 @@ def summary_active_reactive_electric_quantity2csv(time_range: list[str] | tuple[
 
     df.to_csv('./Save/SummaryActiveReactiveElectricQuantity.csv', index=False)
 
-def get_summary_active_reactive_electric_quantity_data(time_range: list[str] | tuple[str]) -> dict:
+def get_summary_active_reactive_electric_quantity_data(
+        time_range: list[str] | tuple[str],
+        terminal_output: bool = True
+) -> dict:
     """
     获取有功无功电能汇总
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(items: values) / dict(None)
     """
 
@@ -1994,7 +2042,8 @@ def get_summary_active_reactive_electric_quantity_data(time_range: list[str] | t
         'negative_reactive_electric_quantity_average': [negative_reactive_electric_quantity_average]
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -2053,10 +2102,11 @@ def summary_active_reactive_power2csv(time_range: list[str] | tuple[str]) -> Non
 
     df.to_csv('./Save/SummaryActiveReactivePower.csv', index=False)
 
-def get_summary_active_reactive_power_data(time_range: list[str] | tuple[str]) -> dict:
+def get_summary_active_reactive_power_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取有功无功功率汇总数据
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict(items: values) / dict(None)
     """
 
@@ -2123,7 +2173,8 @@ def get_summary_active_reactive_power_data(time_range: list[str] | tuple[str]) -
         'reactive_power_load_rate_minimum': [reactive_power_load_rate_minimum]
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -2216,10 +2267,11 @@ def summary_apparent_power2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/SummaryApparentPower.csv', index=False)
 
-def get_summary_apparent_power_data(time_range: list[str] | tuple[str]) -> dict:
+def get_summary_apparent_power_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取视在功率汇总数据
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict: dict(time:{items: values}) / dict(None)
     """
 
@@ -2311,7 +2363,8 @@ def get_summary_apparent_power_data(time_range: list[str] | tuple[str]) -> dict:
         'apparent_power_load_rate_minimum': [apparent_power_load_rate_minimum]
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -2415,10 +2468,11 @@ def summary_power_factor2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/SummaryPowerFactor.csv', index=False)
 
-def get_summary_power_factor_data(time_range: list[str] | tuple[str]) -> dict:
+def get_summary_power_factor_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取功率因数汇总数据
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict: dict(time:{items: values}) / dict(None)
     """
 
@@ -2525,7 +2579,8 @@ def get_summary_power_factor_data(time_range: list[str] | tuple[str]) -> dict:
         'c_phase_power_factor_average': [c_phase_power_factor_average]
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -2592,10 +2647,11 @@ def summary_voltage_current2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/SummaryVoltageCurrent.csv', index=False)
 
-def get_summary_voltage_current_data(time_range: list[str] | tuple[str]) -> dict:
+def get_summary_voltage_current_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取电压电流汇总数据
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
+    :param terminal_output: 控制终端是否输出
     :return: dict: dict(time:{items: values}) / dict(None)
     """
 
@@ -2670,7 +2726,8 @@ def get_summary_voltage_current_data(time_range: list[str] | tuple[str]) -> dict
         'c_phase_current_peak_valley_difference': [c_phase_current_peak_valley_difference]
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
 
@@ -2708,7 +2765,7 @@ def summary_electricity_bill2csv(time_range: list[str] | tuple[str]) -> None:
 
     df.to_csv('./Save/SummaryElectricityBill.csv', index=False)
 
-def get_summary_electricity_bill_data(time_range: list[str] | tuple[str]) -> dict:
+def get_summary_electricity_bill_data(time_range: list[str] | tuple[str], terminal_output: bool = True) -> dict:
     """
     获取电费数据汇总
     :param time_range: 时间范围，如果时间需要精确到分钟，格式为yyyy-MM-dd HH:mm，如果需要精确到天，格式为yyyy-MM-dd
@@ -2746,6 +2803,7 @@ def get_summary_electricity_bill_data(time_range: list[str] | tuple[str]) -> dic
         'valley_electricity_bill': [valley_electricity_bill]
     }
 
-    print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
+    if terminal_output:
+        print(tabulate(show_data, headers='keys', tablefmt='simple', showindex=False))
 
     return return_data
