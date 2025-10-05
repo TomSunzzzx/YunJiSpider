@@ -7,17 +7,23 @@
 * **开始**  
 * **如何使用**  
 请先将项目克隆至本地
-1. 安装环境（anaconda）  
+1. 安装环境  
+(anaconda)
 ```bash
 conda create -n YunJiSpider python=3.10
 conda activate YunJiSpider
 pip install -r ./requirements.txt
 ```
+(uv)  
+```bash
+uv sync
+```
 2. 初始化
 登录您的账号：  
 执行：  
 ```bash
-python ./Login.py
+python ./Login.py  # conda
+uv run ./Login.py  # uv
 ```
 输入账号密码后点击确定。  
 现在可以看到./Save目录下有一份Token.txt文件。  
@@ -30,6 +36,7 @@ python ./Login.py
 * **未来计划**
 * [ ] 补全其它数据接口
 * [ ] 设置无用数据过滤
-* [ ] 输出控制
-# 有任何需求请提Issues
-# 欢迎PR
+* [x] 输出控制
+# Tips
+* 有任何需求请提Issues  
+* 欢迎PR
