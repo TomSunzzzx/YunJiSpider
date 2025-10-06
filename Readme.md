@@ -8,28 +8,28 @@
 * **如何使用**  
 请先将项目克隆至本地
 1. 安装环境  
-(anaconda)
+* anaconda
 ```bash
-conda create -n YunJiSpider python=3.10
-conda activate YunJiSpider
-pip install -r ./requirements.txt
+  conda create -n YunJiSpider python=3.10
+  conda activate YunJiSpider
+  pip install -r ./requirements.txt
 ```
-(uv)  
+* uv
 ```bash
-uv sync
+  uv sync
 ```
 2. 初始化
 登录您的账号：  
 执行：  
 ```bash
-python ./Login.py  # conda
-uv run ./Login.py  # uv
+  python ./code/Login.py  # conda
+  uv run ./code/Login.py  # uv
 ```
 输入账号密码后点击确定。  
-现在可以看到./Save目录下有一份Token.txt文件。  
+现在可以看到./code/Save目录下有一份Token.txt文件。  
 请注意不要删除，保护好您的Token，网站每天都会强制更新Token，目前还没有自动登录的方案。  
 3. 现在您可以将`ElectricityData.py`模块导入到您的项目中了  
-您还可以运行`Example.py`参考模块是如何运作的  
+您还可以运行`Example.py`或者运行`Example.ipynb`参考模块是如何运作的  
 * **注意事项**
 1. 本项目暂不包含所有的数据，目前根据作者的需求，仅获取了电力数据下的大部分数据，不包含水能气能，还有电力数据下`四象限无功总电能`、`日冻结电量统计`、`总用电曲线 `、`电表对比 `、`谐波监测`、`发电量分析`和页面下方的`统计报表`，除了以上内容，所有数据获取、汇总都有相应的接口。  
 2. 请遵守爬虫相关法律，不得影响网站正常工作
@@ -37,6 +37,10 @@ uv run ./Login.py  # uv
 * [ ] 补全其它数据接口
 * [ ] 设置无用数据过滤
 * [x] 输出控制
+* [ ] 设置保存路径
 # Tips
 * 有任何需求请提Issues  
 * 欢迎PR
+# 问题
+* **Q**: 为什么环境中要求安装pip？  
+  **A**: 因为最新的项目演示用到了jupyter notebook，而jupyter notebook在pycharm2025.2中运行时会要求用pip安装，使uv安装的jupyter notebook无效。如果不需要在pycharm中运行可以忽略。
